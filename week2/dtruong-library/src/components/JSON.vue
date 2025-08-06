@@ -10,7 +10,7 @@
       <h3>Iterating through Arrays</h3>
       <!-- Activity 6: Render a list containing author names and their birth years. Hint: Make use of the v-for directive to iterate through the array of authors. -->
       <!-- TODO: CODE TO RENDER LIST OF AUTHORS HERE -->
-      
+
       <h3>Filtering Arrays</h3>
       <!-- Activity 7: Render a list containing authors born after 1850. Hint: Make use of the v-for directive to iterate through the array of authors that you have filtered out. -->
       <p>Authors born after 1850:</p>
@@ -79,16 +79,17 @@
     <section class="lab-section">
       <h2>Attribute, Class and Style Binding with <code>v-bind</code></h2>
       <p>Highlighting Specific Authors:</p>
-
     </section>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
+import { ref, computed } from 'vue'
 
 // Activity 1: Import JSON files (authors.json and bookstores.json)
 // TODO: CODE TO IMPORT JSON FILES HERE
+import authors from '../assets/json/authors.json'
+import bookstores from '../assets/json/bookstores.json'
 
 const showMessage = ref(false)
 
@@ -115,7 +116,7 @@ const austen = computed(() => {
 
 <style scoped>
 .json-lab {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 80vw;
   margin: 0 auto;
   padding: 20px;
@@ -160,7 +161,7 @@ code {
   background-color: #e0e0e0;
   padding: 2px 5px;
   border-radius: 4px;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 ul {
