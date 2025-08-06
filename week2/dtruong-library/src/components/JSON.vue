@@ -10,17 +10,30 @@
       <h3>Iterating through Arrays</h3>
       <!-- Activity 6: Render a list containing author names and their birth years. Hint: Make use of the v-for directive to iterate through the array of authors. -->
       <!-- TODO: CODE TO RENDER LIST OF AUTHORS HERE -->
+       <ul>
+        <li v-for="author in authors" :key="author.id">
+          {{ author.name }} ({{ author.birthYear }})
+        </li>
+       </ul>
 
       <h3>Filtering Arrays</h3>
       <!-- Activity 7: Render a list containing authors born after 1850. Hint: Make use of the v-for directive to iterate through the array of authors that you have filtered out. -->
       <p>Authors born after 1850:</p>
       <!-- TODO: CODE TO RENDER LIST OF AUTHORS HERE -->
+       <ul>
+        <li v-for="author in modernAuthors" :key="author.id"">
+          {{ author.name }} ({{ author.birthYear }})
+        </li>
+       </ul>
 
       <h3>Mapping Arrays</h3>
       <p>Famous works:</p>
       <ul>
         <!-- Activity 8: Render a list of all famous works. Hint: Use the v-for directive to iterate through the array of authors that you have filtered out. -->
         <!-- TODO: CODE TO RENDER LIST OF FAMOUS WORKS HERE -->
+        <li v-for="work in allFamousWorks" :key="work">
+          {{ work }}
+        </li>
       </ul>
 
       <h3>Finding in Arrays</h3>
@@ -30,6 +43,11 @@
       <p>{{ austen?.name }}'s works:</p>
       <!-- Activity 9: Render a list of Austen's works. Hint: Use the v-for directive to iterate through the array of authors that you have filtered out. -->
       <!-- TODO: CODE TO RENDER LIST OF AUSTEN'S WORKS HERE -->
+       <ul>
+        <li v-for="work in austen.famousWorks" :key="work.title">
+          {{ work.title }} ({{ work.year }})
+        </li>
+       </ul>
     </section>
 
     <section class="lab-section">
