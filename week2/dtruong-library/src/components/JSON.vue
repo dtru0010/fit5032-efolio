@@ -96,11 +96,13 @@ const showMessage = ref(false)
 // Activity 2: Get authors born after 1850
 const modernAuthors = computed(() => {
   // TODO: CODE TO FILTER ARRAY OF AUTHORS HERE
+  authors.filter((author) => author.birthYear > 1850)
 })
 
 // Activity 3: Get all famous works
 const allFamousWorks = computed(() => {
   // TODO: CODE TO GET ALL FAMOUS WORKS HERE
+  authors.flatMap((author) => author.famousWorks.map((work) => work.title))
 })
 
 // Activity 4: Find author by name
