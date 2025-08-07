@@ -11,7 +11,11 @@
       <!-- Activity 6: Render a list containing author names and their birth years. Hint: Make use of the v-for directive to iterate through the array of authors. -->
       <!-- TODO: CODE TO RENDER LIST OF AUTHORS HERE -->
       <ul>
-        <li v-for="author in authors" :key="author.id">
+        <li
+          v-for="author in authors"
+          :key="author.id"
+          :style="{ color: selectedAuthor === author.id ? 'blue' : 'black' }"
+        >
           {{ author.name }} ({{ author.birthYear }})
         </li>
       </ul>
@@ -21,7 +25,11 @@
       <p>Authors born after 1850:</p>
       <!-- TODO: CODE TO RENDER LIST OF AUTHORS HERE -->
       <ul>
-        <li v-for="author in modernAuthors" :key="author.id">
+        <li
+          v-for="author in modernAuthors"
+          :key="author.id"
+          :style="{ color: selectedAuthor === author.id ? 'blue' : 'black' }"
+        >
           {{ author.name }} ({{ author.birthYear }})
         </li>
       </ul>
@@ -120,6 +128,12 @@
     <section class="lab-section">
       <h2>Attribute, Class and Style Binding with <code>v-bind</code></h2>
       <p>Highlighting Specific Authors:</p>
+      <!-- Optional Activity: Toggle a highlight on selected author depending on the button clicked. -->
+      <ul>
+        <li v-for="author in authors" :key="author.id">
+          <button @click="selectedAuthor = author.id">Highlight {{ author.name }}</button>
+        </li>
+      </ul>
     </section>
   </div>
 </template>
@@ -157,6 +171,9 @@ const austen = computed(() =>
   // TODO: CODE TO FIND AUTHOR BY ID HERE
   authors.find((author) => author.id === 1),
 )
+
+// Optional Activity: Highlight Specific Authors
+const selectedAuthor = ref('')
 </script>
 
 <style scoped>
