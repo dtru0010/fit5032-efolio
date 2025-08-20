@@ -6,6 +6,7 @@ import Column from 'primevue/column'
 const formData = ref({
   username: '',
   password: '',
+  confPassword: '',
   isAustralian: '',
   reason: '',
   gender: '',
@@ -19,12 +20,14 @@ const submitForm = () => {
   validateResidency(true)
   validateGender(true)
   validateReason(true)
+  validateConfPassword(true)
   if (
     !errors.value.username &&
     !errors.value.password &&
     !errors.value.gender &&
     !errors.value.reason &&
-    !errors.value.resident
+    !errors.value.resident &&
+    !errors.value.confPassword
   ) {
     submittedCards.value.push({ ...formData.value })
     clearForm()
@@ -35,6 +38,7 @@ const clearForm = () => {
   formData.value = {
     username: '',
     password: '',
+    confPassword: '',
     isAustralian: '',
     reason: '',
     gender: '',
@@ -44,14 +48,28 @@ const clearForm = () => {
 const errors = ref({
   username: null,
   password: null,
+  confPassword: null,
   resident: null,
   gender: null,
   reason: null,
 })
 
 const validateName = (blur) => {
-  if (formData.value.username.length < 3) {
-    if (blur) errors.value.username = 'Name must be at least 3 characters'
+  const username = formData.value.username
+  const minLength = 3
+  const noSpaces = /\s/.test(username)
+  const noSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(username)
+
+  const userUniqueness = !submittedCards.value.some((card) => card.username === username)
+
+  if (username.length < minLength) {
+    if (blur) errors.value.username = `Name must be at least ${minLength} characters`
+  } else if (noSpaces) {
+    if (blur) errors.value.username = 'Name must not contain spaces'
+  } else if (noSpecialChars) {
+    if (blur) errors.value.username = 'Name must not contain special characters'
+  } else if (!userUniqueness) {
+    if (blur) errors.value.username = 'Name has already been submitted'
   } else {
     errors.value.username = null
   }
@@ -80,6 +98,14 @@ const validatePassword = (blur) => {
   }
 }
 
+const validateConfPassword = (blur) => {
+  if (formData.value.confPassword !== formData.value.password) {
+    if (blur) errors.value.confPassword = 'Passwords do not match.'
+  } else {
+    errors.value.confPassword = null
+  }
+}
+
 const validateResidency = (blur) => {
   if (!formData.value.isAustralian) {
     if (blur) errors.value.resident = 'Please select your Australian residency status.'
@@ -97,8 +123,14 @@ const validateGender = (blur) => {
 }
 
 const validateReason = (blur) => {
-  if (formData.value.reason.length < 10) {
-    if (blur) errors.value.reason = 'Reason must be at least 10 characters long.'
+  const reason = formData.value.reason
+  const minLength = 10
+  const containsLetters = /[a-zA-Z]/.test(reason)
+
+  if (reason.length < minLength) {
+    if (blur) errors.value.reason = `Reason must be at least ${minLength} characters long.`
+  } else if (!containsLetters) {
+    if (blur) errors.value.reason = 'Reason must contain at least one letter.'
   } else {
     errors.value.reason = null
   }
@@ -140,6 +172,18 @@ const validateReason = (blur) => {
               />
               <div v-if="errors.password" class="text-danger">
                 {{ errors.password }}
+              </div>
+              <label for="confPassword" class="form-label">Confirm Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="confPassword"
+                @blur="() => validateConfPassword(true)"
+                @input="() => validateConfPassword(false)"
+                v-model="formData.confPassword"
+              />
+              <div v-if="errors.confPassword" class="text-danger">
+                {{ errors.confPassword }}
               </div>
             </div>
           </div>
