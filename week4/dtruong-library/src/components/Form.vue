@@ -6,7 +6,7 @@ const formData = ref({
   password: '',
   isAustralian: false,
   reason: '',
-  gender: 'male',
+  gender: '',
 })
 
 const submittedCards = ref([])
@@ -71,6 +71,8 @@ const clearForm = () => {
                 class="form-control"
                 id="password"
                 v-model="formData.password"
+                minlength="4"
+                maxlength="10"
                 required
               />
             </div>
@@ -91,10 +93,12 @@ const clearForm = () => {
 
             <div class="col-6">
               <label for="gender" class="form-label">Gender</label>
-              <select class="form-select" id="gender" v-model="formData.gender">
+              <select class="form-select" id="gender" v-model="formData.gender" required>
+                <option value="" disabled>Select your Gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="other">Other</option>
+                <option value="prefer_not_to_say">Prefer not to say</option>
               </select>
             </div>
           </div>
@@ -106,6 +110,7 @@ const clearForm = () => {
               id="reason"
               v-model="formData.reason"
               rows="3"
+              required
             ></textarea>
           </div>
 
