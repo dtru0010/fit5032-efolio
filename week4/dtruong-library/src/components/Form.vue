@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue'
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
 
 const formData = ref({
   username: '',
@@ -104,31 +106,6 @@ const validateReason = (blur) => {
 </script>
 
 <template>
-  <!-- <div class="form">
-    <h1>User Information Form / Credentials</h1>
-
-    <form>
-      <label for="username">Username:</label><br />
-      <input type="text" id="username" name="username" /><br />
-
-      <label for="password">Password:</label><br />
-      <input type="password" id="password" name="password" /><br />
-
-      <label for="isAustralian">Australian Resident?</label><br />
-      <input type="checkbox" id="isAustralian" name="isAustralian" /><br />
-
-      <label for="reason">Reason for Joining:</label><br /><br />
-      <textarea id="reason" name="reason" rows="3"></textarea><br />
-
-      <label for="gender">Gender:</label><br />
-      <select id="gender" name="gender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
-      </select>
-    </form>
-  </div> -->
-
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-8 offset-md-2">
@@ -235,29 +212,15 @@ const validateReason = (blur) => {
         </form>
       </div>
     </div>
-  </div>
-
-  <div class="row mt-5" v-if="submittedCards.length">
-    <div class="d-flex flex-wrap justify-content-start">
-      <div
-        v-for="(card, index) in submittedCards"
-        :key="index"
-        class="card m-2"
-        style="width: 18rem"
-      >
-        <div class="card-header">User Information</div>
-
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Username: {{ card.username }}</li>
-          <li class="list-group-item">Password: {{ card.password }}</li>
-          <li class="list-group-item">
-            Australian Resident: {{ card.isAustralian ? 'Yes' : 'No' }}
-          </li>
-          <li class="list-group-item">Gender: {{ card.gender }}</li>
-          <li class="list-group-item">Reason: {{ card.reason }}</li>
-        </ul>
-      </div>
-    </div>
+    <br />
+    <h2>Submitted Cards</h2>
+    <DataTable :value="submittedCards" table-style="min-width: 50rem">
+      <Column field="username" header="Username" />
+      <Column field="password" header="Password" />
+      <Column field="isAustralian" header="Is Australian Resident?" />
+      <Column field="gender" header="Gender" />
+      <Column field="reason" header="Reason for Joining" />
+    </DataTable>
   </div>
 </template>
 
