@@ -54,6 +54,10 @@ const errors = ref({
   reason: null,
 })
 
+const comments = ref({
+  reason: null,
+})
+
 const validateName = (blur) => {
   const username = formData.value.username
   const minLength = 3
@@ -126,6 +130,7 @@ const validateReason = (blur) => {
   const reason = formData.value.reason
   const minLength = 10
   const containsLetters = /[a-zA-Z]/.test(reason)
+  const containsFriend = /friend/i.test(reason)
 
   if (reason.length < minLength) {
     if (blur) errors.value.reason = `Reason must be at least ${minLength} characters long.`
@@ -133,6 +138,10 @@ const validateReason = (blur) => {
     if (blur) errors.value.reason = 'Reason must contain at least one letter.'
   } else {
     errors.value.reason = null
+  }
+
+  if (containsFriend) {
+    if (blur) comments.value.reason = 'Great to have a friend.'
   }
 }
 </script>
@@ -143,14 +152,11 @@ const validateReason = (blur) => {
       <div class="col-md-8 offset-md-2">
         <div class="text-center">
           <h1 class="text-center">Library Registration Form</h1>
-          <p>
-            This form now includes validation. Registered users are displayed in a data table below
-            (PrimeVue).
-          </p>
+          <p>Let's build some more advanced features into our form.</p>
         </div>
 
         <form @submit.prevent="submitForm">
-          <div class="row">
+          <div class="row mb-3">
             <div class="col-6">
               <label for="username" class="form-label">Username</label>
               <input
@@ -163,59 +169,6 @@ const validateReason = (blur) => {
               />
               <div v-if="errors.username" class="text-danger">
                 {{ errors.username }}
-              </div>
-            </div>
-
-            <div class="col-6">
-              <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                @blur="() => validatePassword(true)"
-                @input="() => validatePassword(false)"
-                v-model="formData.password"
-              />
-              <div v-if="errors.password" class="text-danger">
-                {{ errors.password }}
-              </div>
-              <label for="confPassword" class="form-label">Confirm Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="confPassword"
-                @blur="() => validateConfPassword(true)"
-                @input="() => validateConfPassword(false)"
-                v-model="formData.confPassword"
-              />
-              <div v-if="errors.confPassword" class="text-danger">
-                {{ errors.confPassword }}
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <div class="col-6">
-              <div class="form-check">
-                <label>Australian Resident?</label> <br />
-                <input
-                  type="radio"
-                  id="isAustralianYes"
-                  value="true"
-                  v-model="formData.isAustralian"
-                />
-                <label class="form-check-label" for="isAustralianYes">Yes</label>
-                <br />
-                <input
-                  type="radio"
-                  id="isAustralianNo"
-                  value="false"
-                  v-model="formData.isAustralian"
-                />
-                <label class="form-check-label" for="isAustralianNo">No</label>
-                <div v-if="errors.resident" class="text-danger">
-                  {{ errors.resident }}
-                </div>
               </div>
             </div>
 
@@ -240,18 +193,87 @@ const validateReason = (blur) => {
             </div>
           </div>
 
-          <div class="mb-3">
-            <label for="reason" class="form-label">Reason for Joining</label>
-            <textarea
-              class="form-control"
-              id="reason"
-              v-model="formData.reason"
-              @blur="() => validateReason(true)"
-              @input="() => validateReason(false)"
-              rows="3"
-            ></textarea>
-            <div v-if="errors.reason" class="text-danger">
-              {{ errors.reason }}
+          <div class="row mb-3">
+            <div class="col-6">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                @blur="() => validatePassword(true)"
+                @input="() => validatePassword(false)"
+                v-model="formData.password"
+              />
+              <div v-if="errors.password" class="text-danger">
+                {{ errors.password }}
+              </div>
+            </div>
+            <div class="col-6">
+              <label for="confPassword" class="form-label">Confirm Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="confPassword"
+                @blur="() => validateConfPassword(true)"
+                @input="() => validateConfPassword(false)"
+                v-model="formData.confPassword"
+              />
+              <div v-if="errors.confPassword" class="text-danger">
+                {{ errors.confPassword }}
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-6">
+              <div class="form-group">
+                <label>Australian Resident?</label>
+                <div class="radio-group">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="isAustralianYes"
+                      value="true"
+                      v-model="formData.isAustralian"
+                    />
+                    <label class="form-check-label" for="isAustralianYes">Yes</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="isAustralianNo"
+                      value="false"
+                      v-model="formData.isAustralian"
+                    />
+                    <label class="form-check-label" for="isAustralianNo">No</label>
+                  </div>
+                </div>
+                <div v-if="errors.resident" class="text-danger">
+                  {{ errors.resident }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-12">
+              <label for="reason" class="form-label">Reason for Joining</label>
+              <textarea
+                class="form-control"
+                id="reason"
+                v-model="formData.reason"
+                @blur="() => validateReason(false)"
+                @input="() => validateReason(true)"
+                rows="3"
+              ></textarea>
+              <div v-if="errors.reason" class="text-danger">
+                {{ errors.reason }}
+              </div>
+              <div v-else-if="!errors.reason && comments.reason" class="text-success">
+                {{ comments.reason }}
+              </div>
             </div>
           </div>
 
