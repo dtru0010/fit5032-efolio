@@ -1,6 +1,6 @@
 <script setup>
 import JSON from './components/JSON.vue'
-import Form from './components/Form.vue'
+import Form from './views/HomeView.vue'
 import Header from './components/Header.vue'
 </script>
 
@@ -9,9 +9,10 @@ import Header from './components/Header.vue'
     <Header />
   </header>
 
-  <main>
+  <main class="container mt-5">
     <!-- <JSON /> -->
-    <Form />
+    <!-- <Form /> -->
+    <router-view></router-view>
   </main>
 </template>
 
