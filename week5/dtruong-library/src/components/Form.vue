@@ -141,7 +141,13 @@ const validateReason = (blur) => {
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-8 offset-md-2">
-        <h1 class="text-center">User Information Form</h1>
+        <div class="text-center">
+          <h1 class="text-center">Library Registration Form</h1>
+          <p>
+            This form now includes validation. Registered users are displayed in a data table below
+            (PrimeVue).
+          </p>
+        </div>
 
         <form @submit.prevent="submitForm">
           <div class="row">
@@ -257,7 +263,7 @@ const validateReason = (blur) => {
       </div>
     </div>
     <br />
-    <h2>Submitted Cards</h2>
+    <h2>Submitted Cards (PrimeVue DataTable)</h2>
     <DataTable :value="submittedCards" table-style="min-width: 50rem">
       <Column field="username" header="Username" />
       <Column field="password" header="Password" />
@@ -265,6 +271,29 @@ const validateReason = (blur) => {
       <Column field="gender" header="Gender" />
       <Column field="reason" header="Reason for Joining" />
     </DataTable>
+
+    <div class="row mt-5" v-if="submittedCards.length">
+      <div class="d-flex flex-wrap justify-content-start">
+        <div
+          v-for="(card, index) in submittedCards"
+          :key="index"
+          class="card m-2"
+          style="width: 18rem"
+        >
+          <div class="card-header">User Information</div>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Username: {{ card.username }}</li>
+            <li class="list-group-item">Password: {{ card.password }}</li>
+            <li class="list-group-item">
+              Australian Resident: {{ card.isAustralian ? 'Yes' : 'No' }}
+            </li>
+            <li class="list-group-item">Gender: {{ card.gender }}</li>
+            <li class="list-group-item">Reason: {{ card.reason }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
