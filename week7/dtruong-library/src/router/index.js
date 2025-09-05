@@ -3,6 +3,8 @@ import AboutView from '@/views/AboutView.vue'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import UnauthenticatedView from '@/views/UnauthenticatedView.vue'
+import FirebaseRegisterView from '@/views/FirebaseRegisterView.vue'
+import FirebaseSigninView from '@/views/FirebaseSigninView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const requireAuth = (to, from, next) => {
@@ -40,6 +42,16 @@ const routes = [
     path: '/:pathMatch(.*)*',
     name: 'Unauthenticated',
     component: UnauthenticatedView,
+  },
+  {
+    path: '/FireRegister',
+    name: 'FireRegister',
+    component: FirebaseRegisterView,
+  },
+  {
+    path: '/FireLogin',
+    name: 'FireLogin',
+    component: FirebaseSigninView,
   },
 ]
 
