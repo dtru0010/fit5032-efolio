@@ -1,5 +1,5 @@
 {
-  "name": "dtruong-auth-app",
+  "name": "dtruong-library",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -14,7 +14,11 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "vue": "^3.5.18"
+    "@primevue/themes": "^4.3.7",
+    "bootstrap": "^5.3.7",
+    "primevue": "^4.3.7",
+    "vue": "^3.5.18",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
