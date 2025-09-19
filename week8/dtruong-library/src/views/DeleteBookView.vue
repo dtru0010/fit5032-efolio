@@ -1,16 +1,12 @@
 <template>
   <div>
-    <h1>Update Book</h1>
-    <form @submit.prevent="updateBook">
+    <h1>Delete Book</h1>
+    <form @submit.prevent="deleteBook">
       <div>
-        <label for="currentisbn">ISBN to Update:</label>
+        <label for="currentisbn">ISBN to Delete:</label>
         <input type="text" v-model="isbn" id="currentisbn" required />
       </div>
-      <div>
-        <label for="name">New Name:</label>
-        <input type="text" v-model="newName" id="newname" required />
-      </div>
-      <button type="submit">Update Book</button>
+      <button type="submit">Delete Book</button>
     </form>
   </div>
   <div>
@@ -21,11 +17,10 @@
 <script setup>
 import BookList from '@/components/BookList.vue'
 import db from '@/firebase/init'
-import { collection, getDocs, query, updateDoc, where } from 'firebase/firestore'
+import { collection, deleteDoc, getDocs, query, where } from 'firebase/firestore'
 import { ref } from 'vue'
 
 const isbn = ref('')
-const newName = ref('')
 
 const checkIfBookExists = async (isbn) => {
   const q = query(collection(db, 'books'), where('isbn', '==', isbn))
@@ -36,7 +31,7 @@ const checkIfBookExists = async (isbn) => {
   return null
 }
 
-const updateBook = async () => {
+const deleteBook = async () => {
   try {
     if (!isbn.value) {
       alert('ISBN is required')
@@ -50,15 +45,12 @@ const updateBook = async () => {
       return
     }
 
-    await updateDoc(bookDocRef, {
-      name: newName.value,
-    })
+    await deleteDoc(bookDocRef)
 
     isbn.value = ''
-    newName.value = ''
-    alert('Book updated successfully')
+    alert('Book deleted successfully')
   } catch (error) {
-    console.log('Error updating book: ', error)
+    console.log('Error deleting book: ', error)
   }
 }
 </script>
