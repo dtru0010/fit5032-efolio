@@ -25,6 +25,11 @@ const logoutUser = () => {
           <router-link to="/addbook" class="nav-link" active-class="active">Add Book</router-link>
         </li>
         <li class="nav-item">
+          <router-link to="/updatebook" class="nav-link" active-class="active"
+            >Update Book</router-link
+          >
+        </li>
+        <li class="nav-item">
           <router-link to="/login" v-if="!isAuthenticated" class="nav-link" active-class="active"
             >Login</router-link
           >

@@ -7,6 +7,7 @@ import FirebaseRegisterView from '@/views/FirebaseRegisterView.vue'
 import FirebaseSigninView from '@/views/FirebaseSigninView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import AddBookView from '@/views/AddBookView.vue'
+import UpdateBookView from '@/views/UpdateBookView.vue'
 
 const requireAuth = (to, from, next) => {
   const { isAuthenticated } = useAuth()
@@ -58,6 +59,11 @@ const routes = [
     path: '/addbook',
     name: 'AddBook',
     component: AddBookView,
+  },
+  {
+    path: '/updatebook',
+    name: 'UpdateBook',
+    component: UpdateBookView,
   },
 ]
 
