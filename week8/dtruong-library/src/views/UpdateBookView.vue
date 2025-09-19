@@ -13,13 +13,9 @@
       <button type="submit">Update Book</button>
     </form>
   </div>
-  <div>
-    <BookList className="mt-5" />
-  </div>
 </template>
 
 <script setup>
-import BookList from '@/components/BookList.vue'
 import db from '@/firebase/init'
 import { collection, getDocs, query, updateDoc, where } from 'firebase/firestore'
 import { ref } from 'vue'

@@ -22,6 +22,9 @@ const logoutUser = () => {
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
         <li class="nav-item">
+          <router-link to="/booklist" class="nav-link" active-class="active">Book List</router-link>
+        </li>
+        <li class="nav-item">
           <router-link to="/addbook" class="nav-link" active-class="active">Add Book</router-link>
         </li>
         <li class="nav-item">
