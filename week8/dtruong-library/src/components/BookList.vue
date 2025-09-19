@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Books with ISBN > 1000</h1>
+    <h1>{{ title }}</h1>
     <div>
       <button @click="fetchBooksOrdered">Order by Name</button>
       <button @click="fetchBooksLimited">Show First 3 Books</button>
@@ -18,6 +18,7 @@ import { collection, getDocs, query, where, orderBy, limit } from 'firebase/fire
 import { onMounted, ref } from 'vue'
 
 const books = ref([])
+const title = ref('Book List with ISBN > 1000')
 
 const fetchBooks = async () => {
   try {
@@ -28,6 +29,7 @@ const fetchBooks = async () => {
       booksArray.push({ id: doc.id, ...doc.data() })
     })
     books.value = booksArray
+    title.value = 'Book List with ISBN > 1000'
   } catch (error) {
     console.log('Error fetching books:', error)
   }
@@ -42,6 +44,7 @@ const fetchBooksOrdered = async () => {
       booksArray.push({ id: doc.id, ...doc.data() })
     })
     books.value = booksArray
+    title.value = 'Book List ordered by name'
   } catch (error) {
     console.log('Error fetching ordered books:', error)
   }
@@ -56,6 +59,7 @@ const fetchBooksLimited = async () => {
       booksArray.push({ id: doc.id, ...doc.data() })
     })
     books.value = booksArray
+    title.value = 'Book List limited to first 3'
   } catch (error) {
     console.log('Error fetching limited books:', error)
   }
