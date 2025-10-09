@@ -1,0 +1,53 @@
+<template>
+  <div>
+    <h1>Add Book</h1>
+    <form @submit.prevent="addBook">
+      <div>
+        <label for="isbn">ISBN:</label>
+        <input type="text" v-model="isbn" id="isbn" required />
+      </div>
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" v-model="name" id="name" required />
+      </div>
+      <button type="submit">Add Book</button>
+    </form>
+  </div>
+</template>
+
+<script setup>
+import db from '@/firebase/init'
+import axios from 'axios'
+import { addDoc, collection } from 'firebase/firestore'
+import { ref } from 'vue'
+
+const isbn = ref('')
+const name = ref('')
+
+const addBook = async () => {
+  try {
+    const isbnNumber = Number(isbn.value)
+    if (isNaN(isbnNumber)) {
+      alert('ISBN must be a valid number')
+      return
+    }
+
+    const capitalisedRes = await axios.get( , {
+      params: { text: name.value },
+    })
+
+    await addDoc(collection(db, 'books'), {
+      isbn: isbnNumber,
+      name: capitalisedRes.data.capitalizedText,
+    })
+
+    isbn.value = ''
+    name.value = ''
+    alert('Book added successfully')
+  } catch (error) {
+    console.log('Error adding book: ', error)
+  }
+}
+</script>
+
+<style scoped></style>
