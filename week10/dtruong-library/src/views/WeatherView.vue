@@ -20,7 +20,7 @@
 
 <script setup>
 import axios from 'axios'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const apiKey = 'a2a5697b0b375b9a93cbeb19c227ba83'
 
@@ -41,9 +41,14 @@ const iconUrl = computed(() => {
   return null
 })
 
-onMounted(() => {
-  fetchCurrentLocationWeather()
-})
+const searchByCity = () => {
+  if (city.value.trim() !== '') {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${apiKey}`
+    fetchWeatherData(url)
+  } else {
+    fetchCurrentLocationWeather()
+  }
+}
 
 const fetchCurrentLocationWeather = async () => {
   if (navigator.geolocation) {

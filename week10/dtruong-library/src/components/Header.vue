@@ -53,6 +53,11 @@ const logoutUser = () => {
           >
         </li>
         <li class="nav-item">
+          <router-link to="/getallbookapi" class="nav-link" active-class="active"
+            >Get All Books API</router-link
+          >
+        </li>
+        <li class="nav-item">
           <router-link to="/login" v-if="!isAuthenticated" class="nav-link" active-class="active"
             >Login</router-link
           >
