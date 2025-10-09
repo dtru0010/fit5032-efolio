@@ -38,6 +38,11 @@ const logoutUser = () => {
           >
         </li>
         <li class="nav-item">
+          <router-link to="/getbookcount" class="nav-link" active-class="active"
+            >Get Book Count</router-link
+          >
+        </li>
+        <li class="nav-item">
           <router-link to="/login" v-if="!isAuthenticated" class="nav-link" active-class="active"
             >Login</router-link
           >
