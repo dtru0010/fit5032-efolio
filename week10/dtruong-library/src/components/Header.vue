@@ -43,6 +43,11 @@ const logoutUser = () => {
           >
         </li>
         <li class="nav-item">
+          <router-link to="/weathercheck" class="nav-link" active-class="active"
+            >Weather Check</router-link
+          >
+        </li>
+        <li class="nav-item">
           <router-link to="/login" v-if="!isAuthenticated" class="nav-link" active-class="active"
             >Login</router-link
           >
