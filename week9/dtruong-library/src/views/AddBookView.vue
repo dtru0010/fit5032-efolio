@@ -17,6 +17,7 @@
 
 <script setup>
 import db from '@/firebase/init'
+import axios from 'axios'
 import { addDoc, collection } from 'firebase/firestore'
 import { ref } from 'vue'
 
@@ -31,9 +32,13 @@ const addBook = async () => {
       return
     }
 
+    const capitalisedRes = await axios.get( , {
+      params: { text: name.value },
+    })
+
     await addDoc(collection(db, 'books'), {
       isbn: isbnNumber,
-      name: name.value,
+      name: capitalisedRes.data.capitalizedText,
     })
 
     isbn.value = ''

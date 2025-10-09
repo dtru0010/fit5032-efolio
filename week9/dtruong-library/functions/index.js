@@ -36,6 +36,7 @@ setGlobalOptions({ maxInstances: 10 })
 //   response.send("Hello from Firebase!");
 // });
 
+// Counts the number of books in the Firestore 'books' collection
 exports.countBooks = onRequest((req, res) => {
   cors(req, res, async () => {
     try {
@@ -47,5 +48,17 @@ exports.countBooks = onRequest((req, res) => {
       console.error('Error fetching book count:', error.message)
       res.status(500).send('Failed to fetch book count')
     }
+  })
+})
+
+// Capitalises a given string
+exports.capitalize = onRequest((req, res) => {
+  cors(req, res, () => {
+    const text = req.query.text
+    if (!text) {
+      return res.status(400).send('Please provide a text query parameter')
+    }
+    const capitalizedText = text.toString().toUpperCase()
+    res.status(200).send({ capitalizedText })
   })
 })
