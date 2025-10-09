@@ -13,6 +13,7 @@ import BookListView from '@/views/BookListView.vue'
 import { name } from '@vue/eslint-config-prettier/skip-formatting'
 import GetBookCountView from '@/views/GetBookCountView.vue'
 import WeatherView from '@/views/WeatherView.vue'
+import CountBookApi from '@/views/CountBookApi.vue'
 
 const requireAuth = (to, from, next) => {
   const { isAuthenticated } = useAuth()
@@ -89,6 +90,11 @@ const routes = [
     path: '/weathercheck',
     name: 'WeatherCheck',
     component: WeatherView,
+  },
+  {
+    path: '/countbookapi',
+    name: 'CountBookApi',
+    component: CountBookApi,
   },
 ]
 

@@ -2,10 +2,18 @@
 import JSON from './components/JSON.vue'
 import Form from './views/HomeView.vue'
 import Header from './components/Header.vue'
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const showHeader = computed(() => {
+  return router.currentRoute.value.name !== 'CountBookApi'
+})
 </script>
 
 <template>
-  <header>
+  <header v-if="showHeader">
     <Header />
   </header>
 
