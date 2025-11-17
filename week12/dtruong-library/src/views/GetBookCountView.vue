@@ -16,7 +16,7 @@ const error = ref(null)
 
 const getBookCount = async () => {
   try {
-    const res = await axios.get('https://countbooks-rtapmza2ea-uc.a.run.app')
+    const res = await axios.get()
     count.value = res.data.count
     error.value = null
   } catch (err) {

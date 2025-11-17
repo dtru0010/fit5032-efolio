@@ -10,7 +10,6 @@ import AddBookView from '@/views/AddBookView.vue'
 import UpdateBookView from '@/views/UpdateBookView.vue'
 import DeleteBookView from '@/views/DeleteBookView.vue'
 import BookListView from '@/views/BookListView.vue'
-import { name } from '@vue/eslint-config-prettier/skip-formatting'
 import GetBookCountView from '@/views/GetBookCountView.vue'
 
 const requireAuth = (to, from, next) => {

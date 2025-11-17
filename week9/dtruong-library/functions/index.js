@@ -7,12 +7,12 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 
-const { setGlobalOptions } = require('firebase-functions')
-const { onRequest } = require('firebase-functions/https')
-const logger = require('firebase-functions/logger')
+import { setGlobalOptions } from 'firebase-functions'
+import { onRequest } from 'firebase-functions/https'
+import admin from 'firebase-admin'
+import cors from 'cors'
 
-const admin = require('firebase-admin')
-const cors = require('cors')({ origin: true })
+const corsHandler = cors({ origin: true })
 
 admin.initializeApp()
 
@@ -37,8 +37,8 @@ setGlobalOptions({ maxInstances: 10 })
 // });
 
 // Counts the number of books in the Firestore 'books' collection
-exports.countBooks = onRequest((req, res) => {
-  cors(req, res, async () => {
+export const countBooks = onRequest((req, res) => {
+  corsHandler(req, res, async () => {
     try {
       const booksCollection = admin.firestore().collection('books')
       const snapshot = await booksCollection.get()
@@ -52,8 +52,8 @@ exports.countBooks = onRequest((req, res) => {
 })
 
 // Capitalises a given string
-exports.capitalize = onRequest((req, res) => {
-  cors(req, res, () => {
+export const capitalize = onRequest((req, res) => {
+  corsHandler(req, res, () => {
     const text = req.query.text
     if (!text) {
       return res.status(400).send('Please provide a text query parameter')
